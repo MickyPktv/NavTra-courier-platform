@@ -77,8 +77,6 @@ module.exports.login_post = async (req, res) => {
     delete user.password;
     delete user.roles;
 
-    
-
     const token = createToken(user);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ jwt: token });
