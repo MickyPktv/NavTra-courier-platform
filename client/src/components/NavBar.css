@@ -1,0 +1,13 @@
+.active-link {
+    color: #272d2f;
+    text-decoration: none;
+    background-color: #ffc529;
+    padding: 3px 10px 3px;
+    border-radius: 5px;
+}
+
+.myLink {
+    color: #d7d7d7;
+    text-decoration: none;
+  }
+
