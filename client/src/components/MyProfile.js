@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import jwt_decode from 'jwt-decode';
-import { Card, CardContent, CardHeader, CardMedia, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from "@mui/material";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Link } from "react-router-dom";
 
 const Profile = () => {
 
@@ -28,7 +30,7 @@ useEffect(() => {
   <CardMedia
     component="img"
     height="200"
-    image={user.avatarUrl ? user.avatarUrl : "images/avatar-man.jpg"}
+    image={user.avatarUrl ? user.avatarUrl : "images/newAvatar.png"}
     sx={{margin:"auto", width:"150px"}}
   ></CardMedia>
 
@@ -43,10 +45,15 @@ useEffect(() => {
   {`Mobile: +359${user.phoneNumber}`}
     </Typography>
     <Typography variant="body2" color="text.secondary">
+  {`Your address: ${user.address}`}
+    </Typography>
+    <Typography variant="body2" color="text.secondary">
   {`Date of Birth: ${user.dateOfBirth}`}
     </Typography>
   </CardContent>
-
+    <Box>
+      <Button><AddCircleIcon></AddCircleIcon><Link to="/sign-up" className="myLink-content" >Add new order</Link></Button>
+    </Box>
   </Card>
   </Grid>
   

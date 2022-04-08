@@ -16,6 +16,7 @@ const SignUp = () => {
   const user_password = useRef(null);
   const user_phoneNumber = useRef(null);
   const dateOfBirth = useRef(null);
+  const address = useRef(null);
   const [userResult, setUserResult] = useState(null);
 
 
@@ -25,7 +26,8 @@ const SignUp = () => {
       email: user_email.current.value,
       password: user_password.current.value,
       phoneNumber: user_phoneNumber.current.value,
-      dateOfBirth: dateOfBirth.current.value
+      dateOfBirth: dateOfBirth.current.value,
+      address: address.current.value
 
     };
     try {
@@ -66,6 +68,10 @@ const SignUp = () => {
     .matches(
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Not valid phone number')
     .required('Phone number is required'),
+  address: yup.string()
+    .min(10, 'Too Short!')
+    .max(30, 'Too Long!')
+    .required('Required'),
 });
 
   const formik = useFormik({
@@ -75,6 +81,7 @@ const SignUp = () => {
       password: '',
       phoneNumber: '',
       dateOfBirth: '',
+      address: ''
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -144,13 +151,22 @@ const SignUp = () => {
             <TextField
               id="phoneNumber"
               label="Phone Number"
-              type="phoneNumber"
               variant="standard"
               onChange={formik.handleChange}
               inputRef={user_phoneNumber}
               value={formik.values.phoneNumber}
               error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
               helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+            />
+             <TextField
+              id="address"
+              label="Your address"
+              variant="standard"
+              onChange={formik.handleChange}
+              inputRef={address}
+              value={formik.values.address}
+              error={formik.touched.address && Boolean(formik.errors.address)}
+              helperText={formik.touched.address && formik.errors.address}
             />
             <TextField
             label="Date of birth"

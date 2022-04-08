@@ -21,6 +21,9 @@ const UserSchema = new Schema({
     dateOfBirth: {
         type: String,
     },
+    address: {
+      type: String,
+  },
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,
