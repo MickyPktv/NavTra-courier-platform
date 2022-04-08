@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 // initialize routes
 app.get('*', checkUser);
 app.use('/api/', require('./routes/authRoutes'));
+app.use('/api/', require('./routes/ordersRoutes'));
 app.get('/track-your-item', requireAuth, (req, res) => res.render('track-your-item'));
 
 // //error handling

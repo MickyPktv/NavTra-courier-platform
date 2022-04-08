@@ -2,7 +2,7 @@ import { Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography } fr
 import React, { useState, useEffect } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const BASE_API_URL = 'http://localhost:8080';
+const BASE_API_URL = 'http://localhost:3535/api';
 const AllUsersList = () => {
     const [users, setUsers] = useState([]);
 
@@ -35,13 +35,12 @@ const AllUsersList = () => {
                 titleTypographyProps={{
                   fontSize: 20,
                 }}
-                subheader={`Username: ${user.username}`}>
+                subheader={`Username: ${user.name}`}>
               </CardHeader>
               <CardMedia
                 component="img"
-                width="180"
-                height="150"
                 image={user.avatarUrl ? user.avatarUrl : "images/avatar-man.jpg"}
+                sx={{margin:"auto", width:"150px"}}
               ></CardMedia>
               <CardContent><Typography>{`Registered on: ${user.dateAndTimeRegistered}`}</Typography></CardContent>
 

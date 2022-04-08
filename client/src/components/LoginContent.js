@@ -38,7 +38,7 @@ const Login = () => {
       if (data.jwt) {
         localStorage.setItem("jwt", data.jwt);
         // eslint-disable-next-line no-restricted-globals
-        // location.assign('/my-profile')
+        location.assign('/my-profile')
       }
       console.log(data.errors.email)
       if (data.errors) {

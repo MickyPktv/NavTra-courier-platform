@@ -88,5 +88,9 @@ module.exports.login_post = async (req, res) => {
 
 }
 
-//adding new function
-
+// get list of users from db
+module.exports.users_get = (req, res) => {
+  User.find({}).then(function(user){
+    res.send(user);
+});
+}
