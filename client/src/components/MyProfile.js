@@ -19,6 +19,7 @@ useEffect(() => {
   else {
   const storedToken = localStorage.getItem('jwt');
   const decoded = jwt_decode(storedToken);
+  console.log(decoded)
   if (decoded.user) {
    setUser(decoded.user);
   } 

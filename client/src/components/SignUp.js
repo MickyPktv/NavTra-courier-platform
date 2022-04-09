@@ -92,13 +92,14 @@ const SignUp = () => {
 
   return (
     <Grid container 
+    justifyContent="center"
     spacing={2}
     sx={{
       backgroundImage: `url(${BackgroundLogin})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
     }} >
-      <Grid item xs={12} md={12} display="flex" alignitems="stretch " justifyContent="center">
+      <Grid item xs={12} md={8} display="flex" alignitems="stretch " >
         <Paper
           sx={{
             "& .MuiTextField-root": { m: 1, width: "80%" },

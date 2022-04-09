@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,10 +6,26 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import "./NavBar.css"
 import { NavLink } from "react-router-dom";
-
+import { Typography } from "@mui/material";
+import jwt_decode from 'jwt-decode';
 
 
 const Navigation = () => {
+
+  const [user, setUser] = useState({});
+  
+  useEffect(() => {
+    if (localStorage.getItem("jwt")===null){
+    }
+    else {
+    const storedToken = localStorage.getItem('jwt');
+    const decoded = jwt_decode(storedToken);
+    if (decoded.user) {
+     setUser(decoded.user);
+    } 
+  }
+  }, []);
+
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#273649" }}>
@@ -44,13 +60,13 @@ const Navigation = () => {
           </Button>
 
           <Button>
-            <NavLink to="/all-recipes" className={({ isActive }) => isActive ? "active-link" : "myLink"}>
+            <NavLink to="/pricing" className={({ isActive }) => isActive ? "active-link" : "myLink"}>
               Pricing
             </NavLink>
           </Button>
 
           <Button>
-            <NavLink to="/users-list" className={({ isActive }) => isActive ? "active-link" : "myLink"}>
+            <NavLink to="/contacts" className={({ isActive }) => isActive ? "active-link" : "myLink"}>
               Contacts
             </NavLink>
           </Button>
@@ -58,14 +74,16 @@ const Navigation = () => {
         </Box>
 
           <Box sx={{flexGrow: 1, width:"80%", display: { md: "flex", justifyContent: "flex-end"} }}>
+
+            <Typography className="hello">{user.name}</Typography>
         
-          <Button>
+          <Button className="login" >
             <NavLink to="/login"  className={({ isActive }) => isActive ? "active-link" : "myLink"}>
               Login
             </NavLink>
           </Button>
 
-          <Button>
+          <Button className="signUp">
             <NavLink to="/sign-up" className={({ isActive }) => isActive ? "active-link" : "myLink"}>
               Sign Up
             </NavLink>

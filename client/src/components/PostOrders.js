@@ -33,6 +33,7 @@ const NewOrder = () => {
   const product_quantity = useRef(null);
   const userId = user._id;
   const userName  = user.name;
+  const userAddress  = user.address;
   const addInfo = useRef(null);
 
   const [userResult, setUserResult] = useState(null);
@@ -45,7 +46,8 @@ const NewOrder = () => {
       quantity: product_quantity.current.value,
       addInfo: addInfo.current.value,
       user: userId,
-      userName: userName
+      userName: userName,
+      address: userAddress
 
     };
     try {
