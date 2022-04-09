@@ -5,7 +5,9 @@ import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from "react-router-dom";
 
+const BASE_API_URL = "http://localhost:3535/api";
 const Profile = () => {
+
 
 const [user, setUser] = useState({});
 
@@ -22,9 +24,24 @@ useEffect(() => {
 }
 }, []);
 
+const userID = user._id
+
+
+const [orders, setOrders] = useState([]);
+  
+useEffect(() => {
+  const fetchOrders = async () => {
+    const res = await fetch(`${BASE_API_URL}/orders/`);
+    const json = await res.json();
+    setOrders(json);
+  };
+  fetchOrders();
+}, []);
+
 
   return (
     <Grid container spacing={6} justifyContent="center">
+      
      <Grid item xs={12} md={4} display="flex" alignitems="stretch">    
         <Card sx={{marginTop: "10px", width:"100%", display:"flex", flexWrap:"wrap", flexDirection:"column"}}>
       <CardHeader
@@ -63,33 +80,34 @@ useEffect(() => {
   </Card>
   </Grid>
   
-  <Grid item xs={12} md={6} display="flex" alignitems="stretch">    
-        <Card sx={{marginTop: "10px", width:"100%", display:"flex", flexWrap:"wrap", flexDirection:"column"}}>
+   
+  <Grid item xs={12} md={6} display="flex" alignitems="stretch" justifyContent="center" flexDirection="column">
+
+    <Box alignSelf="center"><Typography variant="h6" color="#cd7700">Order History</Typography></Box>
+
+  {orders
+  .filter(order => order.user === userID)
+  .map((order) => (  
+        <Card sx={{marginTop: "10px", width:"100%", display:"flex", flexWrap:"wrap"}}>
       <CardHeader
-    title={`ORDERS HISTORY`}
+    title={`Order`}
     titleTypographyProps={{
       fontSize: 16,
     }}>
   </CardHeader>
-  <CardMedia
-    component="img"
-    height="200"
-    image={user.imageUrl}
-    sx={{margin:"auto"}}
-  ></CardMedia>
-
   <CardContent sx={{margin:"auto", textAlign:"left"}}>
     <Typography variant="body2" color="text.secondary">
-  {`Email:${user.email}`}
+  {`Product: ${order.title}`}
     </Typography>
     <Typography variant="body2" color="text.secondary">
-  {`Mobile: +359${user.phoneNumber}`}
+  {`URL: ${order.url}`}
     </Typography>
     <Typography variant="body2" color="text.secondary">
-  {`Date of Birth:${user.dataOfBirth}`}
+  {`Qunatity: ${order.quantity} pcs`}
     </Typography>
   </CardContent>
   </Card>
+    ))}  
   </Grid>
 
 </Grid>
