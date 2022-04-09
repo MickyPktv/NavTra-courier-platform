@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const BASE_API_URL = "http://localhost:3535/api";
-const RecipesList = () => {
+const AllOrdersList = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -73,4 +73,4 @@ async function deletePost(recipeId){
 }
 
 
-export default RecipesList;
+export default AllOrdersList;

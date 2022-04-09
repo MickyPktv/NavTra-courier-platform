@@ -1,9 +1,10 @@
-import { Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { DataGrid } from '@mui/x-data-grid';
 
 const BASE_API_URL = 'http://localhost:3535/api';
-const AllUsersList = () => {
+
+const AllUsersList = () =>  {
+
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -17,45 +18,29 @@ const AllUsersList = () => {
       fetchUser();
     }, []);
 
-    async function deleteUser(userId){
-      const resp = await fetch(`${BASE_API_URL}/users/${userId}`, {
-          method: 'DELETE',
-      });
-      const deleted = await resp.json();
-      window.location.reload();
-    }
-  
-    return (
-      <Grid container spacing={2}>
-          {users.map((user) => (
-            <Grid item xs={12} md={3} display="flex" alignitems="stretch" >    
-            <Card sx={{marginTop: "10px", width:"100%"}}>
-                  <CardHeader
-                title={user.name}
-                titleTypographyProps={{
-                  fontSize: 20,
-                }}
-                subheader={`Username: ${user.name}`}>
-              </CardHeader>
-              <CardMedia
-                component="img"
-                image={user.avatarUrl ? user.avatarUrl : "images/avatar-man.jpg"}
-                sx={{margin:"auto", width:"150px"}}
-              ></CardMedia>
-              <CardContent><Typography>{`Registered on: ${user.dateAndTimeRegistered}`}</Typography></CardContent>
+    const columns = [
+      { field: '_id', headerName: 'ID', width: 100 },
+      { field: 'name', headerName: 'Full name', width: 250 },
+      { field: 'email', headerName: 'Email', width: 200 },
+      { field: 'phoneNumber', headerName: 'Phone number', width: 200 },
+      { field: 'address', headerName: 'Address', width: 300 },
+      { field: 'deleteUser', headerName: '', width: 30 },
+    
+    ];
 
-              <Button sx={{color:"#cd7700"}} onClick={() => {
-               deleteUser(user.id);
-             }}aria-label="delete">
-              <DeleteIcon />
-            </Button>
-            
-              </Card>
-              </Grid>
-          ))}
-      </Grid>
-      );
-  }
 
+  return (
+    <div style={{ height: 500, width: '100%' }}>
+      <DataGrid
+        rows={users}
+        getRowId={(row) => row._id}
+        columns={columns}
+        pageSize={7}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        disableSelectionOnClick
+      />
+    </div>
+  );
+}
 export default AllUsersList;
-

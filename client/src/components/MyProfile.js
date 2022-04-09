@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from "react";
 import jwt_decode from 'jwt-decode';
 import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from "@mui/material";
@@ -9,11 +10,16 @@ const Profile = () => {
 const [user, setUser] = useState({});
 
 useEffect(() => {
+  if (localStorage.getItem("jwt")===null){
+    location.assign('/login')
+  }
+  else {
   const storedToken = localStorage.getItem('jwt');
   const decoded = jwt_decode(storedToken);
   if (decoded.user) {
    setUser(decoded.user);
-  }
+  } 
+}
 }, []);
 
 
@@ -52,7 +58,7 @@ useEffect(() => {
     </Typography>
   </CardContent>
     <Box>
-      <Button><AddCircleIcon></AddCircleIcon><Link to="/sign-up" className="myLink-content" >Add new order</Link></Button>
+      <Button><AddCircleIcon sx={{padding:"1px"}}></AddCircleIcon><Link to="/make-new-order" className="myLink-content" >Add new order</Link></Button>
     </Box>
   </Card>
   </Grid>

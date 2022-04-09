@@ -16,6 +16,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
+app.get('/my-profile', requireAuth, (req, res) => res.render('my-profile'));
 
 //connect to MongoDB
 mongoose.connect('mongodb://localhost/ordergo');
@@ -27,7 +28,8 @@ app.use(bodyParser.json());
 app.get('*', checkUser);
 app.use('/api/', require('./routes/authRoutes'));
 app.use('/api/', require('./routes/ordersRoutes'));
-app.get('/track-your-item', requireAuth, (req, res) => res.render('track-your-item'));
+
+
 
 // //error handling
 // app.use(function(err, req, res, next){

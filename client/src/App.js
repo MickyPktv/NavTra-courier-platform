@@ -3,29 +3,20 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./index.css";
-// import RecipesList from "./components/FetchRecipes";
 import AllUsersList from "./components/FetchUsers";
 import FooterBasic from "./components/Footer";
 import Navigation from "./components/NavBar";
 import TrackItem from "./components/TrackItem";
-// import blogsApiClient from "./components/service/blogs-api-client";
 import Main from "./components/Main"
 import LogInContent from "./components/LoginContent";
 import Profile from "./components/MyProfile";
 import NewOrder from "./components/PostOrders";
+import AllOrdersList from "./components/FetchOrders";
 
 
 const SignUp = React.lazy(() => import("./components/SignUp"));
 
 function App() {
-  // const [recipes, setRecipe] = useState([]);
-
-  // function handleSubmitRecipe(recipe) {
-  //     blogsApiClient.postFavRecipe(recipe)
-  //       .then(created => {
-  //         setRecipe([...recipe, created])
-  //       })
-  //   } 
 
   return (
     <div className="App">
@@ -49,8 +40,8 @@ function App() {
             <Route path="/my-profile" element={<Profile/>} />
             <Route path="/track-your-item" element={<TrackItem/>} />
             <Route path="/make-new-order" element={<NewOrder/>} />
-            {/* <Route path="/all-recipes" element={<RecipesList onSubmit={handleSubmitRecipe}/>}/> */}
             <Route path="/users-list" element={<AllUsersList/>} />
+            <Route path="/orders-list" element={<AllOrdersList/>} />
           </Routes>
           </Grid>
         </Container>
