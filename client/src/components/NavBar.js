@@ -75,11 +75,11 @@ const Navigation = () => {
 
           <Box sx={{flexGrow: 1, width:"80%", display: { md: "flex", justifyContent: "flex-end"} }}>
 
-            <Typography className="hello">{user.name}</Typography>
+            {/* <Typography className="hello">{user.name}</Typography> */}
         
           <Button className="login" >
-            <NavLink to="/login"  className={({ isActive }) => isActive ? "active-link" : "myLink"}>
-              Login
+            <NavLink to="/my-profile"  className={({ isActive }) => isActive ? "active-link" : "myLink"}>
+              My profile
             </NavLink>
           </Button>
 

@@ -1,11 +1,13 @@
+/* eslint-disable no-restricted-globals */
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import BackgroundLogin from "../images/photo22.jpg";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Box } from "@mui/system";
+
 
 const Login = () => {
 
@@ -13,9 +15,9 @@ const Login = () => {
   const user_email = useRef(null);
   const user_password = useRef(null);
   const [result, setResult] = useState(null);
-  const emailError = document.getElementsByClassName('email-error').innerHTML;
-  console.log(emailError)
-  const passwordError = document.getElementsByClassName('.password.error').innerHTML;
+  const [loginErrorEmail, setLoginErrorEmail] = useState(null);
+  const [loginErrorPass, setLoginErrorPass] = useState(null);
+  const navigate = useNavigate();
 
   async function getData() {
 
@@ -37,18 +39,20 @@ const Login = () => {
       console.log(data)
       if (data.jwt) {
         localStorage.setItem("jwt", data.jwt);
-        // eslint-disable-next-line no-restricted-globals
-        location.assign('/my-profile')
+        navigate(`/my-profile`);
       }
-      console.log(data.errors.email)
-      if (data.errors) {
-        emailError.innerHTML= data.errors.email;
-        passwordError.innerHTML = data.errors.password;
-      }
-    } catch (err) {
+      if (data.err) {
+        setLoginErrorEmail(data.errors.email)
+        setLoginErrorPass(data.errors.password)
+        console.log(data.err)
+    } 
+  }
+    catch (err) {
       setResult(err.message);
     }
   }
+
+
 
   const validationSchema = yup.object({
   email: yup.string()
@@ -75,6 +79,7 @@ const Login = () => {
     },
   });
 
+
   return (
     <Grid container 
     spacing={2}
@@ -98,8 +103,17 @@ const Login = () => {
           {result && (
             <Typography>
               {result}
-            </Typography>
-            
+            </Typography>           
+          )}
+            {loginErrorEmail && (
+            <Typography>
+              {loginErrorEmail}
+            </Typography>           
+          )}
+           {loginErrorPass && (
+            <Typography>
+              {loginErrorPass}
+            </Typography>           
           )}
 
             <TextField

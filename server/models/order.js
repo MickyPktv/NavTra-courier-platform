@@ -17,6 +17,9 @@ const OrderSchema = new Schema({
     },
     addInfo: {
         type: String
+    },
+    address: {
+        type: String
     }
 })
 

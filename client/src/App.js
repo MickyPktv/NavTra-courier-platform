@@ -12,6 +12,7 @@ import LogInContent from "./components/LoginContent";
 import Profile from "./components/MyProfile";
 import NewOrder from "./components/PostOrders";
 import AllOrdersList from "./components/FetchOrders";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const SignUp = React.lazy(() => import("./components/SignUp"));
