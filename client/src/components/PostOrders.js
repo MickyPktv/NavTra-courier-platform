@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import "../index.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import BackgroundLogin from "../images/photo22.jpg";
 import jwt_decode from 'jwt-decode';
+import { Link } from "react-router-dom";
 
 const NewOrder = () => {
 
@@ -30,8 +30,11 @@ const NewOrder = () => {
   const baseURL = "http://localhost:3535/api";
   const product_title = useRef(null);
   const product_url = useRef(null);
-  const product_qty = useRef(null);
+  const product_quantity = useRef(null);
   const userId = user._id;
+  const userName  = user.name;
+  const addInfo = useRef(null);
+
   const [userResult, setUserResult] = useState(null);
 
 
@@ -39,13 +42,15 @@ const NewOrder = () => {
     const postData = {
       title: product_title.current.value,
       url: product_url.current.value,
-      quantity: product_qty.current.value,
-      user: userId
+      quantity: product_quantity.current.value,
+      addInfo: addInfo.current.value,
+      user: userId,
+      userName: userName
 
     };
     try {
       const res = await fetch(`${baseURL}/orders`, {
-        method: "post",
+        method: "POST",
         credentials: 'include',
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +61,8 @@ const NewOrder = () => {
         const message = `An error has occured:`;
         throw new Error(message);
       }
-      const result = <Typography variant="h7" sx={{color:"#cd7700", fontFamily: 'Roboto'}}>Your order has been submitted!</Typography>;
+      const result = <Typography variant="h7" sx={{color:"#272d2f", fontFamily: 'Roboto'}}>Your order has been submitted! <Link to="/my-profile" className="myLink-content" >Back to my orders</Link></Typography>;
+
       setUserResult(result);
     } catch (err) {
       setUserResult(err.message);
@@ -72,7 +78,7 @@ const NewOrder = () => {
     .required('Required'),
   qty: yup
     .string('Enter quantity')
-    .required('Quantity field is required'),
+    .required('Required'),
 });
 
   const formik = useFormik({
@@ -80,6 +86,7 @@ const NewOrder = () => {
       product: '',
       url: '',
       qty: '',
+      addInfo: ''
 
     },
     validationSchema: validationSchema,
@@ -140,18 +147,27 @@ const NewOrder = () => {
               label="Quantity"
               name="qty"
               variant="standard"
-              inputRef={product_qty}
+              inputRef={product_quantity}
               value={formik.values.qty}
               onChange={formik.handleChange}
               error={formik.touched.qty && Boolean(formik.errors.qty)}
               helperText={formik.touched.qty && formik.errors.qty}
+            />
+             <TextField
+              id="addInfo"
+              label="Additional information"
+              name="addInfo"
+              variant="standard"
+              inputRef={addInfo}
+              value={formik.values.addInfo}
+              onChange={formik.handleChange}
             />
             <Box>
             <Button 
               sx={{ mb: 3, mt: 5, color: "#273649", borderColor: "#273649"}}
               variant="outlined" 
               type="submit"
-              >Submit your oder</Button>
+              >Submit your order</Button>
             </Box>
 
           </form>

@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode';
 import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
 
 const BASE_API_URL = "http://localhost:3535/api";
 const Profile = () => {
@@ -39,8 +40,18 @@ useEffect(() => {
 }, []);
 
 
+
+const columns = [
+  { field: 'title', headerName: 'Product', width: 200 },
+  { field: 'url', headerName: 'URL of the product', width: 200 },
+  { field: 'quantity', headerName: 'QTY', width: 80 },
+  { field: 'addInfo', headerName: 'Additional Information', width: 200 },
+  { field: 'status', headerName: 'Status', width: 80 },
+
+];
+
   return (
-    <Grid container spacing={6} justifyContent="center">
+    <Grid container spacing={2} justifyContent="center">
       
      <Grid item xs={12} md={4} display="flex" alignitems="stretch">    
         <Card sx={{marginTop: "10px", width:"100%", display:"flex", flexWrap:"wrap", flexDirection:"column"}}>
@@ -81,11 +92,23 @@ useEffect(() => {
   </Grid>
   
    
-  <Grid item xs={12} md={6} display="flex" alignitems="stretch" justifyContent="center" flexDirection="column">
+  <Grid item xs={12} md={8} display="flex" alignitems="stretch" justifyContent="center" flexDirection="column">
 
     <Box alignSelf="center"><Typography variant="h6" color="#cd7700">Order History</Typography></Box>
 
-  {orders
+
+<div style={{ height: 500, width: '100%' }}>
+      <DataGrid
+        rows={orders.filter(order => order.user === userID)}
+        getRowId={(row) => row._id}
+        columns={columns}
+        pageSize={7}
+        rowsPerPageOptions={[5]}
+        disableSelectionOnClick
+      />
+    </div>
+
+  {/* {orders
   .filter(order => order.user === userID)
   .map((order) => (  
         <Card sx={{marginTop: "10px", width:"100%", display:"flex", flexWrap:"wrap"}}>
@@ -107,7 +130,8 @@ useEffect(() => {
     </Typography>
   </CardContent>
   </Card>
-    ))}  
+    ))}   */}
+
   </Grid>
 
 </Grid>
@@ -115,6 +139,3 @@ useEffect(() => {
 }
 
 export default Profile;
-
-
-

@@ -15,7 +15,9 @@ router.post('/orders',(req,res, next) => {
     Order.create(req.body).then(function(order){
         res.send(order)
         }).catch(next);
+        console.log(req.body);
     });
+
 
 
 // update order in the db
