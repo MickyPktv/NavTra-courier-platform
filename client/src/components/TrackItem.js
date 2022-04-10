@@ -1,47 +1,23 @@
-import { Button, Grid, Paper, TextField, Typography,} from "@mui/material";
-import React, { useRef, useState } from "react";
+import { Button, Card, CardContent, CardHeader, Grid, Paper, TextField, Typography,} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import "../index.css";
 
+const BASE_API_URL = 'http://localhost:3535/api';
 
 const TrackItem = () => {
 
-  const baseURL = "http://localhost:3535/api";
-  const recipe_title = useRef(null);
-  const recipe_content = useRef(null);
-  const recipe_cookingTime = useRef(null);
-  const recipe_image = useRef(null);
-  const dataCreated = new Date();
-  const recipe_instructions = useRef(null);
-  const [recipeResult, setRecipeResult] = useState(null);
-  
+  const [order, setOrder] = useState({});
+  const track_item = useRef();
 
-  async function postData() {
-    const postData = {
-      title: recipe_title.current.value,
-      content: recipe_content.current.value,
-      cookingTime: recipe_cookingTime.current.value,
-      imageUrl: recipe_image.current.value,
-      dateAndTimeShare: dataCreated,
-      longContent: recipe_instructions.current.value
+  useEffect(() => {
+    const fetchOrder = async () => {
+      const res = await fetch(
+        BASE_API_URL+ '/order/' + track_item,
+      );
+      const json = await res.json();
+      setOrder(json);
     };
-    try {
-      const res = await fetch(`${baseURL}/orders`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-      if (!res.ok) {
-        const message = `An error has occured:`;
-        throw new Error(message);
-      }
-      const result = <Typography sx={{backgroundColor:"#ebc999", color:"#442C2E"}}>Your</Typography>;
-      setRecipeResult(result);
-    } catch (err) {
-      setRecipeResult(err.message);
-    }
-  }
+  }, []);
 
 
   return (
@@ -57,22 +33,46 @@ const TrackItem = () => {
         elevation={2}
         >
           <div >
-            {recipeResult && (
-              <Typography>
-                <pre>{recipeResult}</pre>
-              </Typography>
-            )}
+
               <Typography variant="h6" component="h2" sx={{ fontFamily: 'Roboto' }}  >
               TRACK YOUR ITEM
               </Typography>
-              <TextField id="recipe-title" label="Tracking Number" variant="standard"/>
+              <TextField 
+              id="track item" 
+              label="Tracking Number" 
+              variant="standard"
+              inputRef={track_item}/>
               <Button 
               sx={{ mb: 3, mt: 3}}
               variant="outlined" 
-              onClick={postData}
+              onClick={setOrder}
               >Submit</Button>
               </div>
         </Paper>
+
+        <Grid item xs={12} md={12} display="flex" alignitems="stretch" justifyContent="center">
+
+              <Card sx={{marginTop: "10px", width:"100%", display:"flex", flexWrap:"wrap"}}>
+            <CardHeader
+          title={`Order`}
+          titleTypographyProps={{
+            fontSize: 16,
+          }}>
+        </CardHeader>
+        <CardContent sx={{margin:"auto", textAlign:"left"}}>
+          <Typography variant="body2" color="text.secondary">
+        {`Product: ${order.title}`}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+        {`URL: ${order.url}`}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+        {`Qunatity: ${order.quantity} pcs`}
+          </Typography>
+        </CardContent>
+        </Card>
+
+        </Grid>
       </Grid>
     </Grid>
   );

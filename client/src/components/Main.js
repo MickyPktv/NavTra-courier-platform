@@ -4,6 +4,8 @@ import Background from "../images/photo11.jpg";
 import HowItWorksFunc from "./Cards";
 import FAQ from "./FAQ";
 
+
+
 const MainContent = () => {
   return (
     <Box spacing={2}>

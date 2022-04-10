@@ -53,10 +53,10 @@ module.exports.login_get = (req, res) => {
 }
 
 module.exports.signup_post = async (req, res) => {
-  const { name, email, password, phoneNumber, dateOfBirth,address } = req.body;
+  const { name, email, password, phoneNumber, dateOfBirth } = req.body;
 
   try {
-    const user = await User.create({ name, email, password, phoneNumber, dateOfBirth, address });
+    const user = await User.create({ name, email, password, phoneNumber, dateOfBirth  });
 
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
@@ -86,11 +86,4 @@ module.exports.login_post = async (req, res) => {
     res.status(400).json({ errors });
   }
 
-}
-
-// get list of users from db
-module.exports.users_get = (req, res) => {
-  User.find({}).then(function(user){
-    res.send(user);
-});
 }

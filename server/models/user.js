@@ -24,13 +24,12 @@ const UserSchema = new Schema({
     address: {
       type: String,
   },
-    roles: [
+    roles: 
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role",
         default: "user"
       }
-    ]
 })
 
 

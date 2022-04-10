@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import jwt_decode from 'jwt-decode';
+import { useNavigate } from "react-router-dom";
 
 const BASE_API_URL = 'http://localhost:3535/api';
 
 const AllUsersList = () =>  {
 
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+      if (localStorage.getItem("jwt")===null){
+        navigate(`/login`);
+      }
+      else {
+      const storedToken = localStorage.getItem('jwt');
+      const decoded = jwt_decode(storedToken);
+      console.log(decoded)
+      if (decoded.user) {
+       setUser(decoded.user);
+      } 
+    }
+    }, []);
 
     useEffect(() => {
       const fetchUser = async () => {

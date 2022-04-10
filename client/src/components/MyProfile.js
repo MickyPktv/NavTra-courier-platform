@@ -3,18 +3,19 @@ import React, { useEffect, useState } from "react";
 import jwt_decode from 'jwt-decode';
 import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
+
 
 const BASE_API_URL = "http://localhost:3535/api";
 const Profile = () => {
-
+const navigate = useNavigate();
 
 const [user, setUser] = useState({});
 
 useEffect(() => {
   if (localStorage.getItem("jwt")===null){
-    location.assign('/login')
+    navigate(`/login`);
   }
   else {
   const storedToken = localStorage.getItem('jwt');
@@ -108,30 +109,6 @@ const columns = [
         disableSelectionOnClick
       />
     </div>
-
-  {/* {orders
-  .filter(order => order.user === userID)
-  .map((order) => (  
-        <Card sx={{marginTop: "10px", width:"100%", display:"flex", flexWrap:"wrap"}}>
-      <CardHeader
-    title={`Order`}
-    titleTypographyProps={{
-      fontSize: 16,
-    }}>
-  </CardHeader>
-  <CardContent sx={{margin:"auto", textAlign:"left"}}>
-    <Typography variant="body2" color="text.secondary">
-  {`Product: ${order.title}`}
-    </Typography>
-    <Typography variant="body2" color="text.secondary">
-  {`URL: ${order.url}`}
-    </Typography>
-    <Typography variant="body2" color="text.secondary">
-  {`Qunatity: ${order.quantity} pcs`}
-    </Typography>
-  </CardContent>
-  </Card>
-    ))}   */}
 
   </Grid>
 

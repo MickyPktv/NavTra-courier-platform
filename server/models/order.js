@@ -20,6 +20,9 @@ const OrderSchema = new Schema({
     },
     address: {
         type: String
+    },
+    status: {
+        type: String
     }
 })
 
