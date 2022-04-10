@@ -18,6 +18,7 @@ const SignUp = React.lazy(() => import("./components/SignUp"));
 
 function App() {
 
+
   return (
     <div className="App">
         <Navigation />
