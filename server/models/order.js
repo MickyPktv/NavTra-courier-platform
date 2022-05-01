@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 const OrderSchema = new Schema({
     title: { 
         type: String },
+    imageUrl: {
+            type: String },
     url: {
         type: String },
     quantity: { 

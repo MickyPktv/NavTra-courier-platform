@@ -30,6 +30,7 @@ const NewOrder = () => {
   const baseURL = "http://localhost:3535/api";
   const product_title = useRef(null);
   const product_url = useRef(null);
+  const image_url = useRef(null);
   const product_quantity = useRef(null);
   const userId = user._id;
   const userName  = user.name;
@@ -42,6 +43,7 @@ const NewOrder = () => {
   async function postData() {
     const postData = {
       title: product_title.current.value,
+      imageUrl: image_url.current.value,
       url: product_url.current.value,
       quantity: product_quantity.current.value,
       addInfo: addInfo.current.value,
@@ -74,7 +76,7 @@ const NewOrder = () => {
   const validationSchema = yup.object({
   product: yup.string()
     .min(2, 'Too Short!')
-    .max(20, 'Too Long!')
+    .max(50, 'Too Long!')
     .required('Required'),
   url: yup.string()
     .required('Required'),
@@ -132,6 +134,17 @@ const NewOrder = () => {
               onChange={formik.handleChange}
               error={formik.touched.product && Boolean(formik.errors.product)}
               helperText={formik.touched.product && formik.errors.product}
+            />
+            <TextField
+              id="imageUrl"
+              label="Image URL"
+              variant="standard"
+              name="imageUrl"
+              inputRef={image_url}
+              value={formik.values.imageUrl}
+              onChange={formik.handleChange}
+              error={formik.touched.imageUrl && Boolean(formik.errors.imageUrl)}
+              helperText={formik.touched.imageUrl && formik.errors.imageUrl}
             />
             <TextField
               id="url"

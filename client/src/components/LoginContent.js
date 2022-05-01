@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { Box } from "@mui/system";
 
 
+
 const Login = () => {
 
   const baseURL = "http://localhost:3535/api";
@@ -88,7 +89,7 @@ const Login = () => {
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
     }} >
-      <Grid item xs={12} md={12} display="flex" alignitems="stretch " justifyContent="center">
+      <Grid item >
         <Paper
           sx={{
             "& .MuiTextField-root": { m: 1, width: "80%" },
