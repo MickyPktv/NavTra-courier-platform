@@ -4,6 +4,9 @@ const bcrypt = require('bcryptjs');
 
 // create order schema & model
 const UserSchema = new Schema({
+    orderId: {
+    type: Number,
+    },
     name: {
         type: String,
     },
@@ -57,7 +60,7 @@ UserSchema.statics.login = async function(email, password) {
     if (auth) {
       return user;
     }
-    throw Error ('Incorrect email');
+    throw Error ('Incorrect password');
   }
   throw Error('Incorrect email');
 }

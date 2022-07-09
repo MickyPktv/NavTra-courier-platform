@@ -54,7 +54,6 @@ const AllOrdersList = () => {
 }
 
   const columns = [
-    { field: '_id', headerName: 'ID', width: 80 },
     { field: 'title', headerName: 'Title', width: 150 },
     { field: 'imageUrl', headerName: 'Image Url', width: 120, renderCell: (imageUrl) => <img src={imageUrl.value} width="100px" alt="orderImage"/> },
     { field: 'url', headerName: 'Url of the product', width: 150 },
@@ -62,8 +61,8 @@ const AllOrdersList = () => {
     { field: 'userName', headerName: 'User', width: 120 },
     { field: 'address', headerName: 'Address', width: 200 },
     { field: 'addInfo', headerName: 'Add Info', width: 100},
-    { field: 'status', headerName: 'Status', width: 100},
-    { field: 'edit', headerName: 'Edit', width: 80, renderCell: renderDetailsButton, disableClickEventBubbling: true,},
+    { field: 'status', align: 'center', headerName: 'Status', width: 150},
+    { field: 'edit', headerName: 'Edit', width: 100, renderCell: renderDetailsButton, disableClickEventBubbling: true,},
   ];
 
   const StyledDataGrid = withStyles({
@@ -84,13 +83,12 @@ const AllOrdersList = () => {
 
   return (
     <Grid container>
-          <div style={{ height: 500, width: '100%' }}>
+          <div style={{ height: 750, width: '100%' }}>
   <StyledDataGrid
     rows={orders}
     getRowId={(row) => row._id}
     columns={columns}
-    pageSize={7}
-    rowsPerPageOptions={[5]}
+    pageSize={4}
     disableSelectionOnClick
   />
 </div>

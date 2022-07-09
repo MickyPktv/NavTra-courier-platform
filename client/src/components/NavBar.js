@@ -73,20 +73,20 @@ const Navigation = () => {
           <Box sx={{flexGrow: 1, width:"80%", display: { md: "flex", justifyContent: "flex-end"} }}>
 
 
-              <Button className="logout">
-            <NavLink to="/my-profile" className={({ isActive }) => isActive ? "active-link" : "myLink"}>
-              My profile
-            </NavLink>
-          </Button>
-            
+                {/* <Button className="logout">
+              <NavLink to="/my-profile" className={({ isActive }) => isActive ? "active-link" : "myLink"}>
+                My profile
+              </NavLink>
+            </Button>
+              */}
 
 
  
-          {/* <Button className="login" >
+          <Button className="login" >
             <NavLink to="/login"  className={({ isActive }) => isActive ? "active-link" : "myLink"} >
              Login
             </NavLink>
-          </Button> */}
+          </Button>
 
 
           <Button className="signUp">

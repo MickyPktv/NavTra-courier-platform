@@ -49,8 +49,8 @@ useEffect(() => {
 const columns = [
   { field: 'title', headerName: 'Product', width: 300 },
   { field: 'quantity', headerName: 'QTY', width: 100 },
-  { field: 'addInfo', headerName: 'Additional Information', width: 400 },
-  { field: 'status', headerName: 'Status', width: 100 },
+  { field: 'addInfo', headerName: 'Additional Information', width: 300 },
+  { field: 'status', headerName: 'Status', width: 200 },
 
 ];
 
@@ -87,11 +87,12 @@ function a11yProps(index) {
   };
 }
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
 
   return (
     <Grid container spacing={2} justifyContent="center">

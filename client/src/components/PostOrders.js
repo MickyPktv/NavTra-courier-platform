@@ -36,12 +36,15 @@ const NewOrder = () => {
   const userName  = user.name;
   const userAddress  = user.address;
   const addInfo = useRef(null);
+  const orderId = Math.round(Math.random() * 400);
 
   const [userResult, setUserResult] = useState(null);
 
+  console.log(orderId)
 
   async function postData() {
     const postData = {
+      orderId: orderId.value,
       title: product_title.current.value,
       imageUrl: image_url.current.value,
       url: product_url.current.value,

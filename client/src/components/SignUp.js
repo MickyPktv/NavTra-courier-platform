@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import BackgroundLogin from "../images/photo22.jpg";
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 
 const SignUp = () => {
@@ -107,6 +108,11 @@ const SignUp = () => {
           autoComplete="off"
           elevation={4}
         >
+          <Typography padding={2}>
+            <HowToRegIcon
+              sx={{ color: "orange", fontSize: "50px" }}
+            ></HowToRegIcon>
+          </Typography>
           <Typography variant="h6" mt={2} sx={{ fontFamily: 'Roboto' }} >JOIN US NOW</Typography>
 
           <form onSubmit={(e) => { e.preventDefault(); formik.handleSubmit(e)}} >

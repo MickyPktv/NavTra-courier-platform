@@ -25,11 +25,14 @@
     "react-toastify": "^8.2.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "homepage":"https://mickypktv.github.io/NavTra-courier-platform/"
   },
   "scripts": {
     "start": "react-scripts start",
     "api": "json-server db.json --port 8080 --routes routes.json",
+    "predeploy": "npm run build", 
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
