@@ -1,6 +1,11 @@
 {
+  "name": "my-app",
+  "version": "0.1.0",
+  "homepage": "https://mickypktv.github.io/NavTra-courier-platform/root/client",
 "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
